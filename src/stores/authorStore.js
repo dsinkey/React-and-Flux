@@ -22,4 +22,4 @@ var AuthorStore = assign({}, EventEmitter.prototype, {
 
 
 
-module.exports =
+module.exports = AuthorStore;
