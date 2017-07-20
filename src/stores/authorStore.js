@@ -1,11 +1,12 @@
 'use strict';
 
-var Dispatcher = require('../dispatcher/appDistpatcher');
+var Dispatcher = require('../dispatcher/appDispatcher');
 var ActionTypes = require('../constants/actionTypes');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var _ = require('lodash');
-var CHANGE_EVENT = 'change';
+var CHANGE_EVENT = 'changeAuthor';
+console.log(CHANGE_EVENT);
 
 var _authors = [];
 
@@ -19,7 +20,7 @@ var AuthorStore = assign({}, EventEmitter.prototype, {
     },
 
     emitChange: function(){
-        this.emitChange(CHANGE_EVENT);
+        this.emit(CHANGE_EVENT);
     },
 
     getAllAuthors: function(){
@@ -32,11 +33,15 @@ var AuthorStore = assign({}, EventEmitter.prototype, {
 });
 
 Dispatcher.register(function(action){
-    switch(action.actionType){
-        case: ActionTypes.CREATE_AUTHOR:
-            _authors.push(action.author);
-            AuthorStore.emitChange();
-    }
+    switch(action.actionType) {
+		case ActionTypes.CREATE_AUTHOR:
+			_authors.push(action.author);
+            console.log("In CREATE_AUTHOR");
+			AuthorStore.emitChange();
+			break;
+		default:
+			// no op
+	}
 });
 
 module.exports = AuthorStore;
