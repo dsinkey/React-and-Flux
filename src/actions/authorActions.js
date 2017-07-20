@@ -13,6 +13,6 @@ var AuthorActions = {
             author: newAuthor
         });
     }
-}
+};
 
 module.exports = AuthorActions;
